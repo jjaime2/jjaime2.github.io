@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Jose's Blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+                <div id="main">
+                    <div class="inner">
+
+                        <!-- Header -->
+                            <header id="header">
+                                <a href="index.html" class="logo"><strong>Jose's</strong> Blog</a>
+                            </header>
+
+                        <!-- Content -->
+                            <section>
+                                <header class="main">
+                                    <h1>Computing Fibonacci numbers with Linear Algebra</h1>
+                                </header>
+
+                                <span class="image main"><img src="images/golden_ratio.jpg" alt="" /></span>
+
+                                <hr class="major" />
+
+                                <p>
+                                    The Fibonacci numbers are a sequence of numbers where every new entry is the sum of the previous two:
+                                </p>
+                                <p>
+                                    \[0, 1, 1, 2, 3, 5, 8, 13, ...\]
+                                </p>
+                                <p>
+                                    To solidify the rule for this sequence mathematically, we can write the equation for the next Fibonacci number as the sum of the two previous entries in the sequence:
+                                </p>
+                                <p>
+                                    \[F_{k+2} = F_{k+1} + F_{k}\]
+                                </p>
+                                <p>
+                                    We begin by putting the <strong>previous</strong> and <strong>next previous</strong> entries into a vector \(u_k\):
+                                </p>
+                                <p>
+                                    \[u_k = \begin{bmatrix}
+                                    F_{k+1}\\
+                                    F_{k}
+                                    \end{bmatrix}\]
+                                </p>
+                                <p>
+                                    This vector \(u_k\) represents our current state, notice that the Fibonacci number of interest \(F_k\) is the second entry in this vector.
+                                    To find the next state vector \(u_{k+1}\), we need to apply a transformation to the current state vector \(u_k\) which represents a single step forward in the sequence.
+                                    We do so by multiplying the current state vector by a matrix \(A\) which is defined as follows:
+                                </p>
+                                <p>
+                                    \[A = \begin{bmatrix}
+                                    1 & 1\\
+                                    1 & 0
+                                    \end{bmatrix}\]
+                                </p>
+                                <p>
+                                    Since multiplication by \(A\) represents a single step forward in the sequence, it's clear that we can start from \(u_0 = (1, 0)\) which represents the initial state vector and multiply by \(A\) one-hundred times to find \(u_{100}\):
+                                </p>
+                                <p>
+                                    \[u_{100} = A^{100}u_0\]
+                                </p>
+                                <p>
+                                    That's great, but \(A\) is a non-diagonal matrix so calculating \(A^{100}\) isn't as straight-forward as raising each element to the hundredth power.
+                                    Instead, we need to diagonalize the matrix by finding the eigenvalues and eigenvectors of \(A\) and factorizing it into the form \(X \Lambda X^{-1}\).
+                                    Here, \(X\) represents the eigenvector matrix and \(\Lambda\) represents the diagonal eigenvalue matrix.
+                                    You might be asking what this factorization does for us. It just so happens that this form makes finding matrix powers almost trivial to compute.
+                                </p>
+                                <p>
+                                    Consider again the matrix power \(A^{100}\), then rewrite the equation as \((X \Lambda X^{-1})^{100}\).
+                                    One of the properties of this factorization is that raising it to any power \(k\) is the same as raising only the eigenvalue matrix to the power \(k\):
+                                </p>
+                                <p>
+                                    \[A^{k} = (X \Lambda X^{-1})^{k}\ = X \Lambda X^{-1} X \Lambda X^{-1} ... X \Lambda X^{-1}\]
+                                </p>
+                                <p>
+                                    The pairs of \(X^{-1} X\) become the identity matrix, and we are left with:
+                                </p>
+                                <p>
+                                    \[A^{k} = X \Lambda^{k} X^{-1}\]
+                                </p>
+                                <p>
+                                    Since we only need to raise the eigenvalue matrix to the power \(k\), the problem has become much easier.
+                                    The matrix power of a diagonal matrix <strong>is</strong> as simple as raising each element to that power.
+                                    So, the next step is to actually find the eigenvalues and eigenvectors of \(A\), then we will have \(X\) and \(\Lambda\), and be able to derive \(X^{-1}\).
+                                </p>
+
+                                <h2>Finding the eigenvalues and eigenvectors</h2>
+                                <p>
+                                    To find the eigenvalues of \(A\), we solve for \(\lambda\) in the equation \(\begin{vmatrix}
+                                    A - \lambda I
+                                    \end{vmatrix} = \begin{vmatrix}
+                                    1 - \lambda & 1\\
+                                    1 & -\lambda
+                                    \end{vmatrix} = 0\)
+                                </p>
+                                <p>
+                                    \[\begin{vmatrix}
+                                    A - \lambda I
+                                    \end{vmatrix} = (1 - \lambda)(-\lambda) - (1)(1) = 0\]
+                                </p>
+                                <p>
+                                    \[\lambda^{2} - \lambda - 1 = 0\]
+                                </p>
+                                <p>
+                                    Using the quadratic formula, we find that \(\lambda = \frac{1 \pm \sqrt{5}}{2}\).
+                                    Thus, \(\lambda_{1} = \frac{1 + \sqrt{5}}{2}\) and \(\lambda_{2} = \frac{1 - \sqrt{5}}{2}\)
+                                </p>
+                                <p>
+                                    Now we need to find the corresponding eigenvectors \(x_{1}\) and \(x_{2}\).
+                                    We need to answer the question, for what vector \(x\) does \((A - \lambda I)x = 0\)?
+                                    We know that for \(\lambda_{1}\) and \(\lambda_{2}\), the following equation holds: \(\lambda^{2} - \lambda - 1 = 0\).
+                                </p>
+                                <p>
+                                    If \(x = \begin{bmatrix}
+                                    a \\
+                                    b
+                                    \end{bmatrix}\), then distributing \(x\) in \((A - \lambda I)x = 0\) yields \(a(1 - \lambda) + b = 0\) which can be rewritten as \(a\lambda - a - b = 0\).
+                                    This looks familiar, let's set \(a = \lambda\) and \(b = 1\) to arrive at \(\lambda^{2} - \lambda - 1 = 0\).
+                                    We conclude that for \(\lambda_{1}\) the corresponding eigenvector is \(\begin{bmatrix} \lambda_{1} \\ 1 \end{bmatrix}\) and for \(\lambda_{2}\) the corresponding eigenvector is \(\begin{bmatrix} \lambda_{2} \\ 1 \end{bmatrix}\)
+                                </p>
+                                <p>
+                                    Finally, we have all the pieces \(\lambda_{1}\), \(\lambda_{2}\), \(x_{1}\), and \(x_{2}\)
+                                </p>
+
+                                <h2>Diagonalizing \(A\) as \(X \Lambda X^{-1}\)</h2>
+                                <p>
+                                    With \(\lambda_{1}\), \(\lambda_{2}\), \(x_{1}\), \(x_{2}\) found, we can represent the eigenvector matrix and eigenvalue matrix as follows:
+                                </p>
+                                <p>
+                                    \[X = \begin{bmatrix}
+                                    x_{1} & x_{2}
+                                    \end{bmatrix} = \begin{bmatrix}
+                                    \lambda_{1} & \lambda_{2} \\
+                                    1 & 1
+                                    \end{bmatrix}\]
+                                </p>
+                                <p>
+                                    \[\Lambda = \begin{bmatrix}
+                                    \lambda_{1} & 0 \\
+                                    0 & \lambda_{2}
+                                    \end{bmatrix}\]
+                                </p>
+                                <p>
+                                    Then, we need to compute the inverse eigenvector matrix \(X^{-1}\):
+                                </p>
+                                <p>
+                                    \[
+                                    X^{-1} = \frac{1}{\begin{vmatrix}
+                                    X
+                                    \end{vmatrix}}
+                                    \begin{bmatrix}
+                                    1 & -\lambda_{2} \\
+                                    -1 & \lambda_{1}
+                                    \end{bmatrix} = \frac{1}{\lambda_{1} - \lambda_{2}}
+                                    \begin{bmatrix}
+                                    1 & -\lambda_{2} \\
+                                    -1 & \lambda_{1}
+                                    \end{bmatrix}
+                                    \]
+                                </p>
+                                <p>
+                                    And the matrix power of the eigenvalue matrix \(\Lambda^{k}\):
+                                </p>
+                                <p>
+                                    \[
+                                    \Lambda^{k} = 
+                                    \begin{bmatrix}
+                                    \lambda_{1}^{k} & 0 \\
+                                    0 & \lambda_{2}^k
+                                    \end{bmatrix}
+                                    \]
+                                </p>
+                                <p>
+                                    Finally, let's solve \(A^{k} = X \Lambda^{k} X^{-1}\):
+                                </p>
+                                <p>
+                                    \[
+                                    A^{k} = X \Lambda^{k} X^{-1} =
+                                    \frac{1}{\lambda_{1} - \lambda_{2}}
+                                    \begin{bmatrix}
+                                    \lambda_{1} & \lambda_{2} \\
+                                    1 & 1
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                    \lambda_{1}^{k} & 0 \\
+                                    0 & \lambda_{2}^{k}
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                    1 & -\lambda_{2} \\
+                                    -1 & \lambda_{1}
+                                    \end{bmatrix}
+                                    \]
+                                </p>
+
+                                <h2>Solving \(u_{k} = A^{k}u_{0}\)</h2>
+                                <p>
+                                    With \(A^{k}\) diagonalized as \(X \Lambda^{k} X^{-1}\), we find \(u_k\) which is the state vector at "time" k:
+                                </p>
+                                <p>
+                                    \[
+                                    u_{k} = A^{k}u_{0} = X \Lambda^{k} X^{-1} u_{0}
+                                    \]
+                                </p>
+                                <p>
+                                    \[
+                                    u_{k} = 
+                                    \frac{1}{\lambda_{1} - \lambda_{2}}
+                                    \begin{bmatrix}
+                                    \lambda_{1} & \lambda_{2} \\
+                                    1 & 1
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                    \lambda_{1}^{k} & 0 \\
+                                    0 & \lambda_{2}^{k}
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                    1 & -\lambda_{2} \\
+                                    -1 & \lambda_{1}
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                    1 \\
+                                    0
+                                    \end{bmatrix}
+                                    \]
+                                </p>
+                                <p>
+                                    \[
+                                    u_{k} = 
+                                    \frac{1}{\lambda_{1} - \lambda_{2}}
+                                    \begin{bmatrix}
+                                    \lambda_{1} & \lambda_{2} \\
+                                    1 & 1
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                    \lambda_{1}^{k} & 0 \\
+                                    0 & \lambda_{2}^{k}
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                    1 \\
+                                    -1
+                                    \end{bmatrix}
+                                    \]
+                                </p>
+                                <p>
+                                    \[
+                                    u_{k} = 
+                                    \frac{1}{\lambda_{1} - \lambda_{2}}
+                                    \begin{bmatrix}
+                                    \lambda_{1} & \lambda_{2} \\
+                                    1 & 1
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                    \lambda_{1}^{k} \\
+                                    -\lambda_{2}^{k}
+                                    \end{bmatrix}
+                                    \]
+                                </p>
+                                <p>
+                                    If our eigenvalues were rational, I might just solve this by substitution and matrix multiplication. Instead, I'll use Python to solve for \(u_{k}\):
+                                </p>
+
+                                <div class="box">
+                                    <pre>
+                                        <code>
+import numpy as np
+
+def fibonacci(k):
+    lambda1 = (1 + np.sqrt(5)) / 2
+    lambda2 = (1 - np.sqrt(5)) / 2
+
+    X = np.array(
+        [
+            [lambda1, lambda2],
+            [1,       1      ],
+        ]
+    )
+
+    v = np.array(
+        [
+            [lambda1**k],
+            [lambda2**k]
+        ]
+    )
+
+    u_k = (1 / (lambda1 - lambda2)) * (X@v)
+
+    F_k = u_k[1][0]
+
+    return int(round(F_k))
+
+for i in range(1, 10):
+    print(fibonacci(i))
+                                        </code>
+                                    </pre>
+                                </div>
+                                <p>
+                                    The output shows the first 9 Fibonacci numbers are \([0, 1, 2, 3, 5, 8, 13, 21, 34]\)
+                                </p>
+                                <p>
+                                    After all that effort you might have been successful in calculating \(F_{100}\) manually, but now we can do it immediately by first calculating \(u_{100}\) and taking it's second element to find \(F_{100}\):
+                                </p>
+                                <p>
+                                    \[F_{100} = 354224848179263111168\]
+                                </p>
+
+                            </section>
+
+                    </div>
+                </div>
+
+				<!-- Sidebar -->
+                <div id="sidebar">
+                    <div class="inner">
+
+                        <!-- Search -->
+                            <section id="search" class="alt">
+                                <form method="post" action="#">
+                                    <input type="text" name="query" id="query" placeholder="Search" />
+                                </form>
+                            </section>
+
+                        <!-- Menu -->
+                            <nav id="menu">
+                                <header class="major">
+                                    <h2>Menu</h2>
+                                </header>
+                                <ul>
+                                    <li><a href="index.html">Homepage</a></li>
+                                    <li><a href="about_me.html">About Me</a></li>
+                                    <li><a href="projects.html">Projects</a></li>
+                                    <li><a href="notes.html">Notes</a></li>
+                                </ul>
+                            </nav>
+
+                        <!-- Section -->
+                            <section>
+                                <header class="major">
+                                    <h2>Get in touch</h2>
+                                </header>
+                                <p></p>
+                                <ul class="contact">
+                                    <li class="icon solid fa-envelope"><a href="#">jose33jaime@gmail.com</a></li>
+                                </ul>
+                            </section>
+
+                        <!-- Footer -->
+                            <footer id="footer">
+                                <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+                            </footer>
+
+                    </div>
+                </div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+			<script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], displayMath: [ ['$$','$$'], ["\\[","\\]"] ], processEscapes: true, processEnvironments:
+				true }, // Center justify equations in code and markdown cells. Elsewhere // we use CSS to left justify single line equations in code cells. displayAlign: 'center',
+				"HTML-CSS": { styles: {'.MathJax_Display': {"margin": 0}}, linebreaks: { automatic: true } } });
+			</script>
+
+	</body>
+</html>
