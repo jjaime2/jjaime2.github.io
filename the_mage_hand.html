@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Jose's Blog</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+                <div id="main">
+                    <div class="inner">
+
+                        <!-- Header -->
+                            <header id="header">
+                                <a href="index.html" class="logo"><strong>Jose's</strong> Blog</a>
+                            </header>
+
+                        <!-- Content -->
+                            <section>
+                                <header class="main">
+                                    <h1>The mage hand <br>(or the articulated robot on wheels)</h1>
+                                </header>
+
+                                <span class="image main"><img src="images/the_mage_hand.jpg" alt="" /></span>
+
+                                <hr class="major" />
+
+                                <p>
+                                    For those that I already lost at the title, Baldur's Gate 3 (DnD) has a spell that summons a mage hand that can interact with the world to move objects.
+                                    By combining two of the robotics projects I've been working on, it seems feasible to make a robot that can interact with the world by maneuvering to items around my apartment and picking them up for me.
+                                    Off the top of my head, I can see this involving some sort of path planning with LiDAR to avoid obstacles while searching for objects, object detection with a camera to locate items of interest, and some fancy kinematics to pick up the item and return it to me.
+                                    I'm sure there will be several issues with this model down the road, but figuring out how to get it to work is the half the fun.
+                                </p>
+
+                                <p>
+                                    This idea only truly came to mind after already having the hardware for the two critical robot systems which are entire projects in their own right.
+                                    First, there's the robot car that I dubbed Altair and was originally intended to be a glorified roomba.
+                                    Then, there's the articulated manipulator I dubbed Vega intended for pick-n-place activities.
+                                </p>
+                                
+                                <h2 id="elements">Altair, the aspiring roomba</h2>
+
+                                <span class="image left"><img src="images/altair.jpg" alt="" /></span>
+
+                                <p>
+                                    The robot Altair will use LiDAR, an inertial measurement unit (IMU), and encoders on each of its mecanum wheels to autonomously navigate my apartment while avoiding obstacles.
+                                    Since I last worked on Altair, I was able to get simple PID control working using four BDC motors with hall effect encoders.
+                                    When I gather the strength to take Altair out of storage and into the clutches of my cat Popo, I'll be hooking up the LiDAR and IMU and making it worthy of the name roomba.
+                                </p>
+
+                                <p>
+                                    For those interested in hearing about the electrical and mechanical aspect of designing Altair, I'll give you the rundown.
+                                    The design of the chassis is largely inspired by work done by <a href="https://jakobfriedl.tech/">Jakob Friedl</a> for his ROBOOST platform, though it required significant adaptations to suit my electrical and mechanical needs.
+                                    The motor and battery fixtures are 3D printed in PLA and are secured onto a frame composed of aluminum extrusions.
+                                    A lithium ion polymer battery provides 14.8V as well as 5V to the entire system after passing through a linear regulator.
+                                    The power electronics are mounted in the interior of the body and distribute the energy needed to drive each motor, and power the microcontroller unit (MCU) and single board computer (SBC) on the navigation layer.
+                                </p>
+
+                                <p>
+                                    On the navigation layer, the two main components are the MCU and SBC.
+                                    The MCU takes as input a desired position and velocity as well as feedback from the encoders, then outputs the appropriate pulse width modulated (PWM) signal to drive each motor using a PID controller.
+                                    The SBC will be communicating with sensors including a LiDAR, IMU, and cameras to perform simultaneous localization and mapping (SLAM), path planning and trajectory generation.
+                                    It will then communicate this trajectory to the MCU to drive the actuators accordingly.
+                                    The specific MCU that I'm using is the STM32F401RE on a NUCLEO board of a similar name that I chose for the sake of convenience.
+                                    The specific SBC that I'm using is the Jetson Nano which I chose primarily because I had used it before.
+                                    This did not stop me from running into endless problems setting it up to run with CUDA enabled and was the inspiration I needed to learn how to use Docker.
+                                    If you want to avoid that same issue, maybe use a Raspberry Pi.
+                                </p>
+
+                                <p>
+                                    After all this is implemented, and with the blessing of foresight early on in the design when specifying the drive motors, we might be able to slap a robot arm on top and call it a "mage hand".
+                                    Before that, though, we need to start with "hand"... or arm.
+                                </p>
+
+                                <h2 id="elements">Vega, the articulated manipulator</h2>
+
+                                <span class="image left"><img src="images/vega.jpg" alt="" /></span>
+
+                                <p>
+                                    The robot Vega will use a chain of rotary joints composed of a stepper and several servo motors to grasp objects that it can recognize and localize using a camera.
+                                    Since I actively started working on this project, I spent lots of time designing the electrical and mechanical aspects of the arm.
+                                    At the latest, I have implemented inverse kinematics and am able to position the end effector given a set of cartesian coordinates and angle for the end effector.
+                                </p>
+
+                                <p>
+                                    On the mechanical side, the robot is composed of a shoulder joint and several arm joints printed in PLA.
+                                    The shoulder joint utilizes a cycloidal drive driven by a stepper motor which rotates the entire arm about the initial z-axis (frame zero).
+                                    Then, each arm joint is driven by servo motors to achieve various configurations within its workspace.
+                                </p>
+
+                                <p>
+                                    On the electrical side, the entire system is powered by an external power supply providing 24V to drive the stepper motor and is regulated down to 5V to power just about everything else.
+                                    Both the stepper and servo motors have their own motor driver boards.
+                                    For the stepper motor I am using a DM556T, whereas for the servo motors I am using a PCA9685.
+                                </p>
+
+                                <p>
+                                    Each motor can be driven to a particular angle given by the MCU which will be receiving joint angles derived through inverse kinematics on an SBC.
+                                    By computing the Jacobian matrix for my particular kinematic model, I will further be able to perform path planning and trajectory generation to reach items localized either by color subtraction techniques or a fully-fledged object detection model trained on my items of interest.
+                                </p>
+
+                                <h2 id="elements">Conclusion</h2>
+
+                                <span class="image left"><img src="images/proof_check.jpg" alt="" /></span>
+
+                                <p>
+                                    Though this project has yet to be finished, I am quite happy with the progress I have made thus far.
+                                    I have enjoyed the process of working on system-level designs that span across the several disciplines.
+                                    I'll be gradually adding relevant resources to the Notes section for things like kinematic equations as well as linking resources like CAD models and source code that might be helpful to others.
+                                    You can rest easy knowing that my cat Momo has thoroughly reviewed my notes for any inaccuracies.
+                                </p>
+
+                            </section>
+
+                    </div>
+                </div>
+
+				<!-- Sidebar -->
+                <div id="sidebar">
+                    <div class="inner">
+
+                        <!-- Search -->
+                            <section id="search" class="alt">
+                                <form method="post" action="#">
+                                    <input type="text" name="query" id="query" placeholder="Search" />
+                                </form>
+                            </section>
+
+                        <!-- Menu -->
+                            <nav id="menu">
+                                <header class="major">
+                                    <h2>Menu</h2>
+                                </header>
+                                <ul>
+                                    <li><a href="index.html">Homepage</a></li>
+                                    <li><a href="about_me.html">About Me</a></li>
+                                    <li><a href="blog.html">Blog (Random Stuff)</a></li>
+                                    <li><a href="projects.html">Projects</a></li>
+                                    <li><a href="notes.html">Notes</a></li>
+                                </ul>
+                            </nav>
+
+                        <!-- Section -->
+                            <section>
+                                <header class="major">
+                                    <h2>Get in touch</h2>
+                                </header>
+                                <p></p>
+                                <ul class="contact">
+                                    <li class="icon solid fa-envelope"><a href="#">jose33jaime@gmail.com</a></li>
+                                </ul>
+                            </section>
+
+                        <!-- Footer -->
+                            <footer id="footer">
+                                <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+                            </footer>
+
+                    </div>
+                </div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
+			<script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], displayMath: [ ['$$','$$'], ["\\[","\\]"] ], processEscapes: true, processEnvironments:
+				true }, // Center justify equations in code and markdown cells. Elsewhere // we use CSS to left justify single line equations in code cells. displayAlign: 'center',
+				"HTML-CSS": { styles: {'.MathJax_Display': {"margin": 0}}, linebreaks: { automatic: true } } });
+			</script>
+
+	</body>
+</html>
