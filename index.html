@@ -1,112 +1,265 @@
-<!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Jose's Blog</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jose Jaime | Robotics Engineer & Researcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* bg-gray-900 */
+            color: #d1d5db; /* text-gray-300 */
+        }
+        /* Custom scrollbar for a more modern look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1f2937; } /* bg-gray-800 */
+        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; } /* bg-gray-600 */
+        ::-webkit-scrollbar-thumb:hover { background: #6b7280; } /* bg-gray-500 */
+        .section-title {
+            @apply text-2xl font-bold text-gray-100 mb-8 border-b-2 border-teal-500 pb-2;
+        }
+    </style>
+</head>
+<body class="antialiased">
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+    <!-- Header & Navigation -->
+    <header class="bg-gray-900/70 backdrop-blur-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-lg font-bold text-white">Jose Jaime</div>
+            <div class="hidden md:flex space-x-6 text-sm">
+                <a href="#about" class="hover:text-teal-400 transition-colors">About</a>
+                <a href="#projects" class="hover:text-teal-400 transition-colors">Projects</a>
+                <a href="#experience" class="hover:text-teal-400 transition-colors">Experience</a>
+                <a href="#skills" class="hover:text-teal-400 transition-colors">Skills</a>
+                <a href="#publications" class="hover:text-teal-400 transition-colors">Publications</a>
+            </div>
+            <a href="mailto:jjaime2@uw.edu" class="hidden md:block bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors">Contact Me</a>
+        </nav>
+    </header>
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+    <main class="container mx-auto px-6 py-12">
+        <!-- Hero Section -->
+        <section id="hero" class="text-center my-16">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">
+                Jose Jaime
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-teal-400 font-medium">
+                Robotics Engineer & Researcher
+            </p>
+            <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-400">
+                Bridging the gap between theory and application in assistive robotics. Focused on developing intelligent, robust systems that enhance human capability and independence.
+            </p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <!-- TODO: Upload your resume PDF to the repository and link it here -->
+                <a href="assets/Jose_Jaime_Resume.pdf" target="_blank" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">View Resume</a>
+                <a href="#contact" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-colors">Get In Touch</a>
+            </div>
+        </section>
 
-							<!-- Header -->
-								<header id="header">
-									<a href="index.html" class="logo"><strong>Jose's</strong> Blog</a>
-								</header>
+        <!-- About Me Section -->
+        <section id="about" class="my-24 scroll-mt-24">
+            <h2 class="section-title">About Me</h2>
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/3 text-center">
+                    <!-- TODO: Replace with your professional photo -->
+                    <img src="https://placehold.co/400x400/1f2937/9ca3af?text=Jose+Jaime" alt="Jose Jaime" class="rounded-full w-48 h-48 mx-auto shadow-lg ring-4 ring-gray-800">
+                </div>
+                <div class="md:w-2/3 text-lg text-gray-400 space-y-4">
+                    <p>
+                        I am a Master's student at the University of Washington's Personal Robotics Lab, advised by Prof. Siddhartha Srinivasa. My work is driven by a passion for creating robotic systems that can safely and effectively operate in human environments to provide meaningful assistance.
+                    </p>
+                    <p>
+                        With a background in software engineering at Google and in the medical device startup space (Sound Life Sciences), I bring a strong foundation in robust software development, data analysis, and regulatory processes to my robotics research. My current focus is on solving the complex manipulation challenges in assistive feeding through my work on the Articutool project.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-							<!-- Banner -->
-								<section id="banner">
-									<div class="content">
-										<header>
-											<h1>Hi, I'm Jose</h1>
-										</header>
-										<p>
-											I'm a software engineer with an interest in computer vision and robotics.
-											This blog will be used to showcase my learning adventure and hopefully teach people some stuff along the way.
-										</p>
-										<ul class="actions">
-											<li><a href="about_me.html" class="button big">About Me</a></li>
-											<li><a href="blog.html" class="button big">Blog (Random Stuff)</a></li>
-											<li><a href="projects.html" class="button big">Projects</a></li>
-											<li><a href="notes.html" class="button big">Notes</a></li>
-										</ul>
-									</div>
-									<span class="image object">
-										<img src="images/cover.jpg" alt="" />
-									</span>
-								</section>
+        <!-- Projects Section -->
+        <section id="projects" class="my-24 scroll-mt-24">
+            <h2 class="section-title">Research & Projects</h2>
+            <div class="space-y-12">
 
-						</div>
-					</div>
+                <!-- Articutool Project -->
+                <div class="bg-gray-800/50 p-6 rounded-lg shadow-lg flex flex-col md:flex-row gap-8 items-center">
+                    <div class="md:w-2/3">
+                        <h3 class="text-xl font-bold text-teal-400 mb-2">Articutool: A Decoupled, Untethered Wrist for Assistive Feeding</h3>
+                        <p class="mb-4 text-gray-400">
+                            The Articutool is a 2-DOF actuated wrist designed to solve a critical limitation in assistive feeding: the inability to handle liquids and granular foods. By integrating onboard computation (RPi5), sensing (IMU, F/T), and power, it operates as an untethered, intelligent module. Its primary contribution is a decoupled control architecture where it performs high-frequency, local orientation control (e.g., leveling a spoon) while the 6-DOF Jaco arm handles gross transport, significantly reducing spillage and improving scooping success.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-700 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">ROS 2</span>
+                            <span class="bg-gray-700 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">Behavior Trees (py_trees)</span>
+                            <span class="bg-gray-700 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">Python</span>
+                            <span class="bg-gray-700 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">C++</span>
+                            <span class="bg-gray-700 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">Pinocchio</span>
+                            <span class="bg-gray-700 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">Hardware Integration</span>
+                        </div>
+                        <div class="flex space-x-4">
+                             <!-- TODO: Update with links to your paper, code, and video -->
+                             <a href="#" class="text-teal-400 hover:text-teal-300 font-semibold transition-colors">[ Paper (In Prep) ]</a>
+                             <a href="#" class="text-teal-400 hover:text-teal-300 font-semibold transition-colors">[ GitHub ]</a>
+                             <a href="#" class="text-teal-400 hover:text-teal-300 font-semibold transition-colors">[ Video Demo ]</a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/3">
+                        <!-- TODO: Replace with a compelling image or GIF of the Articutool -->
+                        <img src="https://placehold.co/600x400/1f2937/9ca3af?text=Articutool+in+Action" alt="Articutool" class="rounded-lg shadow-md aspect-video object-cover">
+                    </div>
+                </div>
 
-				<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
+                <!-- Predictive Safety Project -->
+                <div class="bg-gray-800/50 p-6 rounded-lg shadow-lg flex flex-col md:flex-row-reverse gap-8 items-center">
+                     <div class="md:w-2/3">
+                        <h3 class="text-xl font-bold text-teal-400 mb-2">Predictive Safety Barriers for Human-Robot Collaboration</h3>
+                        <p class="mb-4 text-gray-400">
+                            Developed and evaluated optimization-based controllers using Control Barrier Functions (CBFs) to ensure provable safety for whole-body robot motion around humans. This work involved implementing and benchmarking both reactive and predictive (constant-velocity model) CBF-Quadratic Programs (CBF-QPs) in a MuJoCo simulation environment, and establishing a framework for comparative analysis across key HRI metrics like safety, task efficiency, and motion smoothness.
+                        </p>
+                         <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-700 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">Python</span>
+                            <span class="bg-gray-700 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">MuJoCo</span>
+                            <span class="bg-gray-700 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">Optimization</span>
+                             <span class="bg-gray-700 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">Control Theory</span>
+                             <span class="bg-gray-700 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">JAX</span>
+                        </div>
+                        <div class="flex space-x-4">
+                             <!-- TODO: Update with link to the project's GitHub repo -->
+                             <a href="#" class="text-teal-400 hover:text-teal-300 font-semibold transition-colors">[ GitHub ]</a>
+                        </div>
+                    </div>
+                    <div class="md:w-1/3">
+                        <!-- TODO: Replace with an image from the MuJoCo simulation -->
+                        <img src="https://placehold.co/600x400/1f2937/9ca3af?text=CBF+Simulation" alt="CBF Simulation" class="rounded-lg shadow-md aspect-video object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-							<!-- Search -->
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search" />
-									</form>
-								</section>
+        <!-- Experience Section -->
+        <section id="experience" class="my-24 scroll-mt-24">
+            <h2 class="section-title">Industry Experience</h2>
+            <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:h-full before:w-0.5 before:bg-gray-800">
+                <!-- Google -->
+                <div class="relative pl-12">
+                    <div class="absolute left-0 top-1.5 h-4 w-4 rounded-full bg-teal-500"></div>
+                    <h3 class="text-lg font-bold text-white">Software Engineer, Google</h3>
+                    <p class="text-sm text-gray-500">June 2022 - July 2023</p>
+                    <p class="mt-2 text-gray-400">Architected a robust data collection framework for health algorithm verification and validation. Conducted in-depth data analysis to validate sensor fusion algorithms and de-risk real-world failure conditions, ensuring compliance with strict data security protocols.</p>
+                </div>
+                <!-- Sound Life Sciences -->
+                 <div class="relative pl-12">
+                    <div class="absolute left-0 top-1.5 h-4 w-4 rounded-full bg-teal-500"></div>
+                    <h3 class="text-lg font-bold text-white">Software Engineer, Sound Life Sciences</h3>
+                    <p class="text-sm text-gray-500">October 2020 - June 2022</p>
+                    <p class="mt-2 text-gray-400">Developed a novel Android application employing sonar for non-contact, real-time breathing monitoring. This work was a key component of a medical device that successfully achieved FDA 510(k) clearance, requiring rigorous design of test suites for verification and validation.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills" class="my-24 scroll-mt-24">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="font-bold text-white text-lg mb-2">Languages</h4>
+                    <ul class="list-disc list-inside text-gray-400 space-y-1">
+                        <li>Python</li>
+                        <li>C++</li>
+                        <li>C</li>
+                        <li>Bash</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white text-lg mb-2">Robotics</h4>
+                    <ul class="list-disc list-inside text-gray-400 space-y-1">
+                        <li>ROS 2 (Humble)</li>
+                        <li>MoveIt2</li>
+                        <li>Behavior Trees (py_trees)</li>
+                        <li>Pinocchio</li>
+                        <li>ros2_control</li>
+                        <li>Gazebo & MuJoCo</li>
+                    </ul>
+                </div>
+                 <div>
+                    <h4 class="font-bold text-white text-lg mb-2">Hardware</h4>
+                    <ul class="list-disc list-inside text-gray-400 space-y-1">
+                        <li>Raspberry Pi 5</li>
+                        <li>IMUs & F/T Sensors</li>
+                        <li>Dynamixel Motors</li>
+                        <li>PCB Design</li>
+                        <li>Sensor Integration</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white text-lg mb-2">Tools & Platforms</h4>
+                    <ul class="list-disc list-inside text-gray-400 space-y-1">
+                        <li>Linux (Ubuntu)</li>
+                        <li>Git & GitHub</li>
+                        <li>Docker</li>
+                        <li>CMake</li>
+                        <li>GDB</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Menu</h2>
-									</header>
-									<ul>
-										<li><a href="index.html">Homepage</a></li>
-										<li><a href="about_me.html">About Me</a></li>
-										<li><a href="blog.html">Blog (Random Stuff)</a></li>
-										<li><a href="projects.html">Projects</a></li>
-										<li><a href="notes.html">Notes</a></li>
-									</ul>
-								</nav>
+        <!-- Publications Section -->
+        <section id="publications" class="my-24 scroll-mt-24">
+            <h2 class="section-title">Publications</h2>
+             <div class="bg-gray-800/50 p-6 rounded-lg shadow-lg">
+                <p class="font-semibold text-white">
+                    J. Jaime, S. S. Srinivasa. "Articutool: A Decoupled, Untethered Actuated Wrist for Enhanced Assistive Feeding of Challenging Foods." \textit{In Preparation for IEEE International Conference on Robotics and Systems (IROS)}, 2026.
+                </p>
+            </div>
+        </section>
 
-							<!-- Section -->
-								<section>
-									<header class="major">
-										<h2>Get in touch</h2>
-									</header>
-									<p></p>
-									<ul class="contact">
-										<li class="icon solid fa-envelope"><a href="#">jose33jaime@gmail.com</a></li>
-									</ul>
-								</section>
+    </main>
 
-							<!-- Footer -->
-								<footer id="footer">
-									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-								</footer>
+    <!-- Footer -->
+    <footer id="contact" class="border-t border-gray-800 scroll-mt-24">
+        <div class="container mx-auto px-6 py-10">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold text-white">Get In Touch</h3>
+                    <a href="mailto:jjaime2@uw.edu" class="text-teal-400 hover:text-teal-300 transition-colors">jjaime2@uw.edu</a>
+                </div>
+                <div class="flex space-x-6">
+                    <!-- TODO: Update with your actual LinkedIn and GitHub URLs -->
+                    <!-- LinkedIn -->
+                     <a href="#" class="text-gray-400 hover:text-white transition-colors" title="LinkedIn">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                     </a>
+                     <!-- GitHub -->
+                     <a href="#" class="text-gray-400 hover:text-white transition-colors" title="GitHub">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"/></svg>
+                     </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2025 Jose Jaime. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-						</div>
-					</div>
+    <script>
+        // Simple smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                try {
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                } catch (err) {
+                    console.error("Could not scroll to element: ", this.getAttribute('href'));
+                }
+            });
+        });
+    </script>
 
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
-			<script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], displayMath: [ ['$$','$$'], ["\\[","\\]"] ], processEscapes: true, processEnvironments:
-				true }, // Center justify equations in code and markdown cells. Elsewhere // we use CSS to left justify single line equations in code cells. displayAlign: 'center',
-				"HTML-CSS": { styles: {'.MathJax_Display': {"margin": 0}}, linebreaks: { automatic: true } } });
-			</script>
-
-	</body>
+</body>
 </html>
